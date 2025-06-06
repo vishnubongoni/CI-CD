@@ -3,20 +3,28 @@ pipeline {
   stages {
     stage('Back-end') {
       agent {
-        docker { image 'python:3.11-alpine' }
+        docker {
+          image 'python:3.11-alpine'
+          args '-u 0' // Run as root to avoid permission errors
+        }
       }
       steps {
         sh 'python --version'
         sh 'pip install flask'
+        sh 'python -c "import flask; print(flask.__version__)"'
       }
     }
     stage('Front-end') {
       agent {
-        docker { image 'python:3.11-alpine' }
+        docker {
+          image 'python:3.11-alpine'
+          args '-u 0' // Run as root to avoid permission errors
+        }
       }
       steps {
         sh 'python --version'
         sh 'pip install streamlit'
+        sh 'python -c "import streamlit as st; print(st.__version__)"'
       }
     }
   }

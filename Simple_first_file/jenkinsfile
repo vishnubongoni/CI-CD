@@ -1,16 +1,12 @@
 pipeline {
   agent {
-    docker { image 'python:3.11-alpine' }
-  }
+   docker { image 'python:3.11-alpine' }
+}
   stages {
     stage('Test') {
-      steps {
-        sh 'echo "print(\'Hello from Jenkins Pipeline\')" > test.py'
-        sh 'python test.py'
-      }
-    }
-  }
-}
-
-
-
+	steps {
+	  sh 'python --version'
+	}
+     }
+   }
+}  
